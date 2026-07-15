@@ -67,11 +67,11 @@ export default async function handler(req, res) {
       .single();
 
     if (fetchError || !invoiceData) {
-      return res.status(404).json({ error: 'Invoice tidak valid.' });
+      return res.status(404).json({ error: 'Invalid Invoice.' });
     }
 
     if (invoiceData.tokens <= 0) {
-      return res.status(403).json({ error: 'Kuota token habis (0).' });
+      return res.status(403).json({ error: 'Token has run out (0).' });
     }
 
     // Kurangi token 1
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
       if (!response.ok) {
         const errorText = await response.text();
         console.error("API Error from Google:", errorText);
-        let errorMsg = "Gagal memproses gambar dari AI.";
+        let errorMsg = "Failed to Process Image from AI.";
         try {
           errorMsg = JSON.parse(errorText).error.message;
         } catch(e) {}
@@ -141,6 +141,6 @@ export default async function handler(req, res) {
 
   } catch (err) {
     console.error('Server error:', err);
-    return res.status(500).json({ error: 'Gagal memproses gambar atau server error internal.' });
+    return res.status(500).json({ error: 'Failed to process Image or internal server error.' });
   }
 }
