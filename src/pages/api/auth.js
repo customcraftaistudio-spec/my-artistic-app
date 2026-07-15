@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
       if (error) {
         if (error.code === '23505') { // Kode error duplicate unik di Postgres
-          return res.status(400).json({ error: 'Invoice sudah terdaftar. Silakan login sebagai Member Eksisting.' });
+          return res.status(400).json({ error: 'Invoice Number already Registered. Please login as an Existing Member.' });
         }
         throw error;
       }
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
         .single();
 
       if (error || !data) {
-        return res.status(404).json({ error: 'Invoice tidak ditemukan. Silakan daftar sebagai New User.' });
+        return res.status(404).json({ error: 'Invoice Number not Found. Please Sign in as a New User.' });
       }
       return res.status(200).json({ success: true, tokens: data.tokens });
     }
