@@ -80,14 +80,14 @@ export default function App() {
       const data = await res.json();
 
       if (!res.ok) {
-        setErrorMsg(data.error || "Terjadi kesalahan saat memverifikasi.");
+        setErrorMsg(data.error || "Invalid Verification Process");
         return;
       }
 
       setTokens(data.tokens);
       setCurrentPage('upload');
     } catch (err) {
-      setErrorMsg("Network error. Pastikan server berjalan dan koneksi internet stabil.");
+      setErrorMsg("Error Network. Make sure your server online and internet connection stable.");
     }
   };
 
@@ -124,7 +124,7 @@ export default function App() {
       clearInterval(quoteInterval);
 
       if (!res.ok) {
-        setErrorMsg(data.error || "Gagal meng-generate gambar. Silakan coba lagi.");
+        setErrorMsg(data.error || "Generating Image Failed . Try Again.");
         setCurrentPage('concept');
         return;
       }
